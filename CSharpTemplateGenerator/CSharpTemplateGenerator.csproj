@@ -59,6 +59,7 @@
     <Compile Include="Models\FileBuilderModels\ClassBuilder.cs" />
     <Compile Include="Models\FileBuilderModels\FileBuilder.cs" />
     <Compile Include="Models\BaseCSharpFileModel.cs" />
+    <Compile Include="Models\FileBuilderModels\InterfaceBuilder.cs" />
     <Compile Include="VariablesForm.cs">
       <SubType>Form</SubType>
     </Compile>

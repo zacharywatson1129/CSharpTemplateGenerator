@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace CSharpTemplateGenerator
 {
-    public class ClassBuilder : FileBuilder
+    public sealed class ClassBuilder : FileBuilder
     {
-        public override List<string> GetAsListOfStrings(BaseCSharpFileModel model)
+        public ClassModel model;
+
+        public ClassBuilder(ClassModel model)
         {
-            throw new NotImplementedException();
+            
+        }
+        public override List<string> GetAsListOfStrings()
+        {
+            List<string> output = new List<string>();
+            
+            output.Add(model.ToString());
+            return output;
         }
     }
 }

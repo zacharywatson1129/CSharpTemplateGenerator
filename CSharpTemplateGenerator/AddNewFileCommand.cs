@@ -102,31 +102,51 @@ namespace CSharpTemplateGenerator
                     Project selectedProject = selectedUIHierarchyItem.Object as Project;
                     if (selectedProject != null)
                     {
+                        List<string> lines = null;
                         string pathToAddFileTo = Path.GetDirectoryName(selectedProject.FullName);
-                        /*List<string> lines = new List<string>()
-                        {
-                            "public class Hello",
-                            "{",
-                            "public static void Main(string[] args)",
-                            "{",
-                            "Console.WriteLine(\"Hello\");",
-                            "Console.ReadLine();",
-                            "}",
-                            "}"
-                        };*/
                         MainFileForm mainForm = new MainFileForm();
-                        DialogResult result = mainForm.ShowDialog();
-                        result = form.ShowDialog();
-                        if (result == DialogResult.OK)
+                        if (mainForm.ShowDialog() == DialogResult.OK)
                         {
-
-                            
-
-
+                            BaseCSharpFileModel model;
+                            FileBuilder builder;
+                            CSharpFileType type = mainForm.TemplateToGenerate;
+                            switch (type)
+                            {
+                                case CSharpFileType.Class:
+                                    ClassConfig classForm = new ClassConfig();
+                                    if (classForm.ShowDialog() == DialogResult.OK)
+                                    {
+                                        model = classForm.classModel;
+                                        builder = new ClassBuilder(model as ClassModel);
+                                        lines = builder.GetAsListOfStrings();
+                                    }
+                                    break;
+                                case CSharpFileType.Interface:
+                                    // InterfaceMo classForm = new ClassConfig();
+                                    //if (classForm.ShowDialog() == DialogResult.OK)
+                                    //{
+                                        model = new ClassModel();
+                                        builder = new ClassBuilder(model as ClassModel);
+                                        lines = builder.GetAsListOfStrings();
+                                    //}
+                                    break;
+                                case CSharpFileType.Enum:
+                                    break;
+                                case CSharpFileType.Struct:
+                                    break;
+                                case CSharpFileType.EmptyFile:
+                                    break;
+                                default:
+                                    break;
+                            }
                             string filePath = pathToAddFileTo + form.FileName + ".cs";
                             File.WriteAllLines(filePath, lines);
                             ProjectItems projectItems = selectedProject.ProjectItems;
                             projectItems.AddFromFile(filePath);
+                        }
+                        if (lines != null)
+                        {
+
                         }
                     }
                 }

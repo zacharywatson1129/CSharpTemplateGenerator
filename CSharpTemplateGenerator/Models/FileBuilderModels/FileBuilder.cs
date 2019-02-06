@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSharpTemplateGenerator
 {
-    abstract class FileBuilder
+    public abstract class FileBuilder
     {
-        public abstract List<string> GetAsListOfStrings(BaseCSharpFileModel model);       
+        public BaseCSharpFileModel model;
+        public abstract List<string> GetAsListOfStrings();       
     }
 }

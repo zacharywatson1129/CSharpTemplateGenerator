@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharpTemplateGenerator
 {
-    public sealed class ClassModel
+    public sealed class ClassModel : BaseCSharpFileModel
     {
         public List<VariableModel> Variables;
         public List<MethodModel> Methods;

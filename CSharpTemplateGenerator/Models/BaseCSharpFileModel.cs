@@ -8,7 +8,7 @@ namespace CSharpTemplateGenerator
 {
     public abstract class BaseCSharpFileModel
     {
-        List<MethodModel> Methods;
-        List<VariableModel> Variables;
+        public List<MethodModel> Methods;
+        public List<VariableModel> Variables;
     }
 }
