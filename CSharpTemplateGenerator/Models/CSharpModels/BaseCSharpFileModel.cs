@@ -10,5 +10,8 @@ namespace CSharpTemplateGenerator
     {
         public List<MethodModel> Methods;
         public List<VariableModel> Variables;
+        public string name;
+
+        public abstract string GetSignature();
     }
 }

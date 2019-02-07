@@ -108,7 +108,7 @@ namespace CSharpTemplateGenerator
                         if (mainForm.ShowDialog() == DialogResult.OK)
                         {
                             BaseCSharpFileModel model;
-                            FileBuilder builder;
+                            BaseFileBuilder builder;
                             CSharpFileType type = mainForm.TemplateToGenerate;
                             switch (type)
                             {
@@ -116,18 +116,18 @@ namespace CSharpTemplateGenerator
                                     ClassConfig classForm = new ClassConfig();
                                     if (classForm.ShowDialog() == DialogResult.OK)
                                     {
-                                        model = classForm.classModel;
-                                        builder = new ClassBuilder(model as ClassModel);
-                                        lines = builder.GetAsListOfStrings();
+                                        ///model = classForm.classModel;
+                                       /// builder = new ClassBuilder(model as ClassModel);
+                                       /// lines = builder.GetAsListOfStrings();
                                     }
                                     break;
                                 case CSharpFileType.Interface:
                                     // InterfaceMo classForm = new ClassConfig();
                                     //if (classForm.ShowDialog() == DialogResult.OK)
                                     //{
-                                        model = new ClassModel();
-                                        builder = new ClassBuilder(model as ClassModel);
-                                        lines = builder.GetAsListOfStrings();
+                                        ///model = new ClassModel("whatever");
+                                        ///builder = new ClassBuilder(model as ClassModel);
+                                        ///lines = builder.GetAsListOfStrings();
                                     //}
                                     break;
                                 case CSharpFileType.Enum:

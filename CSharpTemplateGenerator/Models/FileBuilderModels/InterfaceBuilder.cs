@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSharpTemplateGenerator
 {
-    public sealed class InterfaceBuilder : FileBuilder
+    public sealed class InterfaceBuilder : BaseFileBuilder
     {
         public InterfaceModel model;
 

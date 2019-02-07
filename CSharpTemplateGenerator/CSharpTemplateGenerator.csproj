@@ -57,8 +57,8 @@
     <Compile Include="AddNewFileCommand.cs" />
     <Compile Include="AddNewFileCommandPackage.cs" />
     <Compile Include="Models\FileBuilderModels\ClassBuilder.cs" />
-    <Compile Include="Models\FileBuilderModels\FileBuilder.cs" />
-    <Compile Include="Models\BaseCSharpFileModel.cs" />
+    <Compile Include="Models\FileBuilderModels\BaseFileBuilder.cs" />
+    <Compile Include="Models\CSharpModels\BaseCSharpFileModel.cs" />
     <Compile Include="Models\FileBuilderModels\InterfaceBuilder.cs" />
     <Compile Include="VariablesForm.cs">
       <SubType>Form</SubType>
@@ -79,7 +79,7 @@
       <DependentUpon>ClassConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccessModifier.cs" />
-    <Compile Include="Models\ClassModel.cs" />
+    <Compile Include="Models\CSharpModels\ClassModel.cs" />
     <Compile Include="Models\CSharpFileType.cs" />
     <Compile Include="MainFileForm.cs">
       <SubType>Form</SubType>
@@ -93,7 +93,7 @@
     <Compile Include="EmptyFileForm.Designer.cs">
       <DependentUpon>EmptyFileForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\InterfaceModel.cs" />
+    <Compile Include="Models\CSharpModels\InterfaceModel.cs" />
     <Compile Include="Models\MethodModel.cs" />
     <Compile Include="Models\VariableModel.cs" />
     <Compile Include="ProjectHelper.cs" />
@@ -227,9 +227,7 @@
     <Content Include="Resources\AddNewFileCommand.png" />
     <Content Include="Resources\AddNewFileCommandPackage.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\CSharpModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="..\packages\Microsoft.VisualStudio.SDK.EmbedInteropTypes.15.0.10\build\Microsoft.VisualStudio.SDK.EmbedInteropTypes.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SDK.EmbedInteropTypes.15.0.10\build\Microsoft.VisualStudio.SDK.EmbedInteropTypes.targets')" />
