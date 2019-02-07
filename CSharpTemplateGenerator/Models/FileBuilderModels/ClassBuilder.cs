@@ -19,15 +19,16 @@ namespace CSharpTemplateGenerator
             List<string> output = new List<string>();
             // Since this is a class...we need to get the signature of the class...
             output.Add(model.GetSignature());
+            // Opening class brace 
             output.Add("{");
             foreach (MethodModel method in model.Methods)
             {
+                // Method signature and empty method body
                 output.Add(method.ToString());
                 output.Add("{");
                 output.Add("}");
             }
-            output.Add(model.ToString());
-            // Semicolon to indicate end of class
+            // Closing class brace
             output.Add("}");
             return output;
         }

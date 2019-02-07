@@ -8,7 +8,7 @@ namespace CSharpTemplateGenerator
 {
     public sealed class InterfaceBuilder : BaseFileBuilder
     {
-        public InterfaceModel model;
+        public BaseCSharpFileModel model;
 
         public InterfaceBuilder(InterfaceModel model)
         {
@@ -17,7 +17,19 @@ namespace CSharpTemplateGenerator
 
         public override List<string> GetAsListOfStrings()
         {
-            return new List<string>();
+            List<string> output = new List<string>();
+            // Since this is a interface, we simple add each method signature and a semicolon, on one line.
+            output.Add(model.GetSignature());
+            // Opening interface brace 
+            output.Add("{");
+            foreach (MethodModel method in model.Methods)
+            {
+                // Method signature and semicolon
+                output.Add(method.ToString() + ";");
+            }
+            // Closing interface brace
+            output.Add("}");
+            return output;
         }
     }
 }
