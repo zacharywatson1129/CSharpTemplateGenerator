@@ -27,19 +27,24 @@ namespace CSharpTemplateGenerator
             if (comboBoxAccessModifier.SelectedValue as string == "Public")
             {
                 variable._AccessModifier = AccessModifier.Public;
-            } else if (comboBoxAccessModifier.SelectedValue as string == "Private")
+            }
+            else if (comboBoxAccessModifier.SelectedValue as string == "Private")
             {
                 variable._AccessModifier = AccessModifier.Private;
-            } else if (comboBoxAccessModifier.SelectedValue as string == "Protected")
+            }
+            else if (comboBoxAccessModifier.SelectedValue as string == "Protected")
             {
                 variable._AccessModifier = AccessModifier.Protected;
-            } else if (comboBoxAccessModifier.SelectedValue as string == "Internal")
+            }
+            else if (comboBoxAccessModifier.SelectedValue as string == "Internal")
             {
                 variable._AccessModifier = AccessModifier.Internal;
-            } else if (comboBoxAccessModifier.SelectedValue as string == "PrivateProtected")
+            }
+            else if (comboBoxAccessModifier.SelectedValue as string == "PrivateProtected")
             {
                 variable._AccessModifier = AccessModifier.PrivateProtected;
-            } else
+            }
+            else
             {
                 variable._AccessModifier = AccessModifier.ProtectedInternal;
             }
@@ -47,9 +52,9 @@ namespace CSharpTemplateGenerator
             if (textBoxType.Text != "" && !textBoxType.Text.Contains(" "))
             {
                 variable.Type = textBoxType.Text;
-            } else
+            }
+            else
             {
-                // Show a messagebox...
                 MessageBox.Show("Check type...");
             }
 
@@ -59,7 +64,6 @@ namespace CSharpTemplateGenerator
             }
             else
             {
-                // Show a messagebox...
                 MessageBox.Show("check variable name...");
             }
             this.Close();

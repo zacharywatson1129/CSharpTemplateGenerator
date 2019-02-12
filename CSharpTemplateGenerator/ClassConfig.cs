@@ -9,25 +9,20 @@ namespace CSharpTemplateGenerator
         public ClassConfig()
         {
             InitializeComponent();
+            Variables = new List<VariableModel>();
+            Methods = new List<MethodModel>();
         }
 
-        public ClassModel classModel = new ClassModel();
-        public CSharpFileType TemplateToGenerate { get; set; } = CSharpFileType.Class;
+        public ClassModel ClassModel;
         public List<VariableModel> Variables;
         public List<MethodModel> Methods;
-        public string ClassName;
 
 
 
         private void btnNext_Click_1(object sender, EventArgs e)
         {
-            classModel.methods = Methods;
-            classModel.variables = Variables;
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            ClassModel = new ClassModel(textBoxClassName.Text, Variables, Methods);
+            this.Close();
         }
 
         private void btnVariablesAdd_Click(object sender, EventArgs e)

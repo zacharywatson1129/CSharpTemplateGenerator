@@ -90,67 +90,71 @@ namespace CSharpTemplateGenerator
         private void Execute(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            EmptyFileForm form = new EmptyFileForm();
             DTE2 dte2 = (DTE2)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(DTE));
             object[] selectedItems = (object[])dte2.ToolWindows.SolutionExplorer.SelectedItems;
             foreach (UIHierarchyItem selectedUIHierarchyItem in selectedItems)
             {
-                if (selectedUIHierarchyItem.Collection.Count > 1)
+                //if (selectedUIHierarchyItem.Collection.Count > 1)
+                if (selectedItems.Length > 1)
                 {
                     MessageBox.Show("Please select only one project.", "Error");
-                } else {
+                    MessageBox.Show("Length = " + selectedItems.Length + "and: " + selectedUIHierarchyItem.Collection.Count);
+                }
+                else
+                {
                     Project selectedProject = selectedUIHierarchyItem.Object as Project;
                     if (selectedProject != null)
                     {
-                        List<string> lines = null;
                         string pathToAddFileTo = Path.GetDirectoryName(selectedProject.FullName);
-                        MainFileForm mainForm = new MainFileForm();
-                        if (mainForm.ShowDialog() == DialogResult.OK)
-                        {
-                            BaseCSharpFileModel model;
-                            BaseFileBuilder builder;
-                            CSharpFileType type = mainForm.TemplateToGenerate;
-                            switch (type)
-                            {
-                                case CSharpFileType.Class:
-                                    ClassConfig classForm = new ClassConfig();
-                                    if (classForm.ShowDialog() == DialogResult.OK)
-                                    {
-                                        ///model = classForm.classModel;
-                                       /// builder = new ClassBuilder(model as ClassModel);
-                                       /// lines = builder.GetAsListOfStrings();
-                                    }
-                                    break;
-                                case CSharpFileType.Interface:
-                                    // InterfaceMo classForm = new ClassConfig();
-                                    //if (classForm.ShowDialog() == DialogResult.OK)
-                                    //{
-                                        ///model = new ClassModel("whatever");
-                                        ///builder = new ClassBuilder(model as ClassModel);
-                                        ///lines = builder.GetAsListOfStrings();
-                                    //}
-                                    break;
-                                case CSharpFileType.Enum:
-                                    break;
-                                case CSharpFileType.Struct:
-                                    break;
-                                case CSharpFileType.EmptyFile:
-                                    break;
-                                default:
-                                    break;
-                            }
-                            string filePath = pathToAddFileTo + form.FileName + ".cs";
-                            File.WriteAllLines(filePath, lines);
-                            ProjectItems projectItems = selectedProject.ProjectItems;
-                            projectItems.AddFromFile(filePath);
-                        }
-                        if (lines != null)
-                        {
-
-                        }
+                        string filePath = ShowScreens(pathToAddFileTo);
+                        DTE dte1 = (DTE)Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.GetService(typeof(DTE));
+                        ProjectItems projectItems = selectedProject.ProjectItems;
+                        projectItems.AddFromFile(filePath);
                     }
                 }
             }
+        }
+
+        private string ShowScreens(string pathToAddFileTo)
+        {
+            List<string> lines = new List<string>();
+            MainFileForm mainForm = new MainFileForm();
+            BaseFileBuilder builder;
+            BaseCSharpFileModel fileModel;
+            string fileName = "";
+            if (mainForm.ShowDialog() == DialogResult.OK)
+            {
+                switch (mainForm.TemplateToGenerate)
+                {
+                    case CSharpFileType.Class:
+                        ClassConfig classForm = new ClassConfig();
+                        if (classForm.ShowDialog() == DialogResult.OK)
+                        {
+                            fileModel = classForm.ClassModel;
+                            builder = new ClassBuilder(fileModel as ClassModel);
+                            lines = builder.GetAsListOfStrings();
+                            fileName = classForm.ClassModel.name + ".cs";
+                        }                        
+                        break;
+                    case CSharpFileType.Interface:
+                        break;
+                    case CSharpFileType.Enum:
+                        break;
+                    case CSharpFileType.Struct:
+                        break;
+                    case CSharpFileType.EmptyFile:
+                        break;
+                    default:
+                        break;                  
+                }
+
+
+                string filePath = pathToAddFileTo + "\\" + fileName + ".cs";
+                MessageBox.Show(filePath);
+                File.WriteAllLines(filePath, lines);
+                return filePath;
+            }
+            return "";
         }
     }
 }

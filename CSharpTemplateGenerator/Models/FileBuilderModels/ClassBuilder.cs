@@ -21,12 +21,22 @@ namespace CSharpTemplateGenerator
             output.Add(model.GetSignature());
             // Opening class brace 
             output.Add("{");
-            foreach (MethodModel method in model.Methods)
+            if (model.Methods != null)
             {
-                // Method signature and empty method body
-                output.Add(method.ToString());
-                output.Add("{");
-                output.Add("}");
+                foreach (MethodModel method in model.Methods)
+                {
+                    // Method signature and empty method body
+                    output.Add(method.ToString());
+                    output.Add("{");
+                    output.Add("}");
+                }
+            }
+            else if (model.Variables != null)
+            {
+                foreach (VariableModel variable in model.Variables)
+                {
+                    output.Add(variable.ToString());
+                }
             }
             // Closing class brace
             output.Add("}");
